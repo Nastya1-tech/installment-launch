@@ -41,4 +41,17 @@ hasnt 'https?://' "external URL found"
 hasnt 'кросс|выручк|оборот|cross-sell|revenue' "forbidden word"
 grep -qE '\bNDA\b' "$F" && { echo "FAIL: forbidden word NDA"; exit 1; }
 
+has 'Pasha Bank Georgia' "Pasha Bank Georgia"
+has 'MAIB' "MAIB"
+has 'MTBank' "MTBank"
+has 'Umico' "Umico"
+has '80%' "80%"
+has 'id="mail-btn"' "mail button"
+has 'Анастасия Губаревич' "RU signature"
+has 'Anastasia Gubarevich' "EN signature"
+has 'Nestl' "Nestlé"
+has 'Huggies' "Huggies"
+has '5.7.10' "5-7-10"
+hasnt '<img' "img tag found"
+
 echo "OK"

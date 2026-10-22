@@ -143,6 +143,22 @@ main section + section { border-top: 1px solid var(--line); }
 @media (min-width: 720px) {
   .steps { grid-template-columns: 1fr 1fr; }
 }
+
+#experience .cards { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 1.5rem 0 0; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; min-width: 0; }
+.card h3 { font-size: 1.1em; margin: 0 0 0.2em; overflow-wrap: anywhere; }
+.card .market { margin: 0 0 0.6em; color: var(--accent); font-size: 0.85em; font-weight: 600; }
+.card p { margin: 0 0 0.5em; color: var(--muted); font-size: 0.95em; overflow-wrap: anywhere; }
+.card p:last-child { margin-bottom: 0; }
+.card.ref { background: transparent; }
+.results { margin: 1.5rem 0 0; max-width: 46rem; padding: 16px; border-left: 3px solid var(--accent); background: var(--card); border-radius: 0 8px 8px 0; }
+.results p { margin: 0 0 0.5em; overflow-wrap: anywhere; }
+.results p:last-child { margin-bottom: 0; }
+#contact .prose p { color: var(--fg); }
+#contact .sign { margin: 1.5rem 0 0; color: var(--muted); }
+@media (min-width: 720px) {
+  #experience .cards { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
@@ -182,8 +198,26 @@ main section + section { border-top: 1px solid var(--line); }
       <li class="step"><h3><span class="ru">Аналитика</span><span class="en">Analytics</span></h3><p><span class="ru">Отслеживание партнёров и клиентов, чтобы вовремя замечать проблемы.</span><span class="en">Tracking partners and customers to spot problems in time.</span></p></li>
     </ol>
   </div></section>
-  <section id="experience"><div class="wrap"></div></section>
-  <section id="contact"><div class="wrap"></div></section>
+  <section id="experience"><div class="wrap">
+    <h2><span class="ru">Опыт: четыре рынка</span><span class="en">Experience: four markets</span></h2>
+    <div class="cards">
+      <article class="card"><p class="market"><span class="ru">Беларусь</span><span class="en">Belarus</span></p><h3>MTBank</h3><p><span class="ru">С 2011 года. Входила в первую команду, которая строила розничный бизнес банка.</span><span class="en">Since 2011. I was part of the first team building the bank's retail business.</span></p><p><span class="ru">«Халва» — карта рассрочки №1 в Беларуси. «Халва Плюс» — коалиционная программа лояльности, 1 500+ партнёров.</span><span class="en">Halva is the №1 installment card in Belarus. Halva Plus is a coalition loyalty programme with 1,500+ partners.</span></p></article>
+      <article class="card"><p class="market"><span class="ru">Азербайджан</span><span class="en">Azerbaijan</span></p><h3>Umico / Bir</h3><p><span class="ru">5+ лет, построила с нуля. Первая цифровая экосистема в стране с рассрочкой внутри.</span><span class="en">5+ years, built from scratch. The first digital ecosystem in the country with installment inside.</span></p><p><span class="ru">2 000+ партнёров: от небольших магазинов до Coca-Cola, Procter &amp; Gamble, Nestlé, Huggies.</span><span class="en">2,000+ partners: from small shops to Coca-Cola, Procter &amp; Gamble, Nestlé, Huggies.</span></p></article>
+      <article class="card ref"><p class="market"><span class="ru">Грузия</span><span class="en">Georgia</span></p><h3>Pasha Bank Georgia</h3></article>
+      <article class="card ref"><p class="market"><span class="ru">Молдова</span><span class="en">Moldova</span></p><h3>MAIB</h3><p><span class="ru">Крупнейший банк страны.</span><span class="en">The largest bank in the country.</span></p></article>
+    </div>
+    <div class="results">
+      <p><span class="ru">Около 80% покрытия ритейла на каждом рынке.</span><span class="en">About 80% retail coverage in each market.</span></p>
+      <p><span class="ru">Миллионные клиентские базы у каждого продукта.</span><span class="en">Million-strong client bases for each product.</span></p>
+      <p><span class="ru">Каждый запущенный продукт стал первой картой рассрочки на своём рынке и сохранял лидерство 5–7–10 лет после появления конкурентов.</span><span class="en">Each product I launched was the first installment card in its market and kept the leadership for 5–7–10 years after competitors appeared.</span></p>
+    </div>
+  </div></section>
+  <section id="contact"><div class="wrap">
+    <h2><span class="ru">Обсудим запуск</span><span class="en">Let's discuss a launch</span></h2>
+    <div class="prose"><p><span class="ru">Расскажите коротко о банке и рынке, и я отвечу, с чего можно начать.</span><span class="en">Tell me briefly about your bank and market, and I will reply with where to start.</span></p></div>
+    <a class="btn" id="mail-btn" href="mailto:hello@example.com?subject=%D0%97%D0%B0%D0%BF%D1%83%D1%81%D0%BA%20%D1%80%D0%B0%D1%81%D1%81%D1%80%D0%BE%D1%87%D0%BA%D0%B8%3A%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C"><span class="ru">Написать мне</span><span class="en">Write to me</span></a>
+    <p class="sign"><span class="ru">Анастасия Губаревич</span><span class="en">Anastasia Gubarevich</span></p>
+  </div></section>
 </main>
 <script>
 var META = {
