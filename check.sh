@@ -29,8 +29,8 @@ has 'mailto:hello@example\.com' "mailto"
 has 'Написать мне' "RU button text"
 has 'Write to me' "EN button text"
 has '№1' "proof №1"
-has '1 500\+' "proof 1 500+"
-has '2 000\+' "proof 2 000+"
+has '1([ ]|&nbsp;| )500\+' "proof 1 500+"
+has '2([ ]|&nbsp;| )000\+' "proof 2 000+"
 
 [ "$(grep -o 'class="step"' "$F" | wc -l | tr -d ' ')" -eq 7 ] || { echo "FAIL: cycle must have exactly 7 steps"; exit 1; }
 has 'Аналитика' "RU step Аналитика"
