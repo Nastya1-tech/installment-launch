@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Запуск рассрочки для банков</title>
+<meta name="description" content="Помогу банку запустить карту рассрочки и построить вокруг неё партнёрскую сеть.">
+<style>
+:root {
+  --bg: #0b0f14;
+  --fg: #e6edf3;
+  --muted: #9aa7b4;
+  --accent: #4cc9b0;
+  --card: #121922;
+  --line: #243040;
+  --gutter: clamp(16px, 5vw, 32px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+h1, h2, h3 { line-height: 1.2; margin: 0 0 0.6em; }
+h1 { font-size: clamp(2rem, 1.4rem + 3vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem); }
+a { color: var(--accent); }
+
+.ru, .en { display: revert; }
+html[data-lang="en"] .ru { display: none; }
+html[data-lang="ru"] .en { display: none; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 1.25rem;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #06201a;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn:focus-visible, .lang button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(11, 15, 20, 0.92);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 60px;
+}
+.brand { font-weight: 600; letter-spacing: 0.02em; }
+.lang { display: flex; gap: 6px; }
+.lang button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+html[data-lang="ru"] #lang-ru,
+html[data-lang="en"] #lang-en {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+main section { padding: clamp(40px, 8vw, 96px) 0; }
+main section + section { border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <span class="brand"><span class="ru">Запуск рассрочки для банков</span><span class="en">Installment launch for banks</span></span>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="lang-ru" type="button" aria-label="Русский">RU</button>
+      <button id="lang-en" type="button" aria-label="English">EN</button>
+    </div>
+  </div>
+</header>
+<main>
+  <section id="offer"><div class="wrap"></div></section>
+  <section id="problem"><div class="wrap"></div></section>
+  <section id="cycle"><div class="wrap"></div></section>
+  <section id="experience"><div class="wrap"></div></section>
+  <section id="contact"><div class="wrap"></div></section>
+</main>
+<script>
+var META = {
+  ru: {
+    title: "Запуск рассрочки для банков",
+    description: "Помогу банку запустить карту рассрочки и построить вокруг неё партнёрскую сеть.",
+    subject: "Запуск рассрочки: обсудить"
+  },
+  en: {
+    title: "Installment launch for banks",
+    description: "I help banks launch an installment card and build a partner network around it.",
+    subject: "Installment launch: let's talk"
+  }
+};
+var EMAIL = "hello@example.com";
+
+function setLang(lang) {
+  if (lang !== "ru" && lang !== "en") lang = "ru";
+  var m = META[lang];
+  document.documentElement.dataset.lang = lang;
+  document.documentElement.lang = lang;
+  document.title = m.title;
+  var d = document.querySelector('meta[name="description"]');
+  if (d) d.setAttribute("content", m.description);
+  var mail = document.getElementById("mail-btn");
+  if (mail) mail.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(m.subject);
+}
+
+document.getElementById("lang-ru").addEventListener("click", function () { setLang("ru"); });
+document.getElementById("lang-en").addEventListener("click", function () { setLang("en"); });
+</script>
+</body>
+</html>
