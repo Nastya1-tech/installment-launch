@@ -102,6 +102,47 @@ main section + section { border-top: 1px solid var(--line); }
 #offer h1 { max-width: 16ch; }
 #offer .lead { max-width: 40rem; color: var(--muted); font-size: 1.15em; margin: 0 0 1.5rem; }
 #offer .proof { margin: 1.25rem 0 0; max-width: 40rem; color: var(--muted); font-size: 0.9em; }
+
+.prose { max-width: 42rem; }
+.prose p { margin: 0 0 1em; color: var(--muted); }
+.steps {
+  list-style: none;
+  counter-reset: step;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.step {
+  counter-increment: step;
+  position: relative;
+  padding: 16px 16px 16px 64px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-width: 0;
+}
+.step::before {
+  content: counter(step);
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  font-weight: 600;
+}
+.step h3 { font-size: 1.1em; margin: 0 0 0.3em; overflow-wrap: anywhere; }
+.step p { margin: 0; color: var(--muted); font-size: 0.95em; overflow-wrap: anywhere; }
+@media (min-width: 720px) {
+  .steps { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
@@ -121,8 +162,26 @@ main section + section { border-top: 1px solid var(--line); }
     <a class="btn" id="offer-btn" href="mailto:hello@example.com?subject=%D0%97%D0%B0%D0%BF%D1%83%D1%81%D0%BA%20%D1%80%D0%B0%D1%81%D1%81%D1%80%D0%BE%D1%87%D0%BA%D0%B8%3A%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C"><span class="ru">Написать мне</span><span class="en">Write to me</span></a>
     <p class="proof"><span class="ru">«Халва» — карта рассрочки №1 в Беларуси; экосистемы с 1 500+ и 2 000+ партнёров.</span><span class="en">Halva is the №1 installment card in Belarus; ecosystems with 1,500+ and 2,000+ partners.</span></p>
   </div></section>
-  <section id="problem"><div class="wrap"></div></section>
-  <section id="cycle"><div class="wrap"></div></section>
+  <section id="problem"><div class="wrap">
+    <h2><span class="ru">У банка есть всё, кроме партнёров</span><span class="en">The bank has everything except partners</span></h2>
+    <div class="prose">
+      <p><span class="ru">У банка есть деньги, клиентская база и лицензии. Но рассрочка по сути ритейл-продукт: деньги в нём приходят от магазинов, то есть от юридических лиц, а не от физических.</span><span class="en">The bank has the money, the client base and the licences. But installment is essentially a retail product: the money comes from merchants, that is, from legal entities, not from individuals.</span></p>
+      <p><span class="ru">Поэтому нужны партнёрская сеть, широкое покрытие ритейла и удержание партнёров. Магазин, который через три месяца выходит из программы, убивает продукт.</span><span class="en">That takes a partner network, broad retail coverage and partner retention. A merchant who leaves the programme after three months kills the product.</span></p>
+      <p><span class="ru">Классическому банку этого опыта часто не хватает. Рассрочка при этом честная: клиент ничего не переплачивает.</span><span class="en">A classic bank often lacks this experience. The installment itself is honest: the customer pays nothing extra.</span></p>
+    </div>
+  </div></section>
+  <section id="cycle"><div class="wrap">
+    <h2><span class="ru">Что я делаю: полный цикл запуска</span><span class="en">What I do: the full launch cycle</span></h2>
+    <ol class="steps">
+      <li class="step"><h3><span class="ru">Юридическая база</span><span class="en">Legal framework</span></h3><p><span class="ru">Договоры, условия продукта и требования регулятора.</span><span class="en">Contracts, product terms and regulatory requirements.</span></p></li>
+      <li class="step"><h3><span class="ru">Построение продукта</span><span class="en">Product building</span></h3><p><span class="ru">Условия для клиента и партнёра, процессы и правила работы.</span><span class="en">Terms for the customer and the partner, processes and operating rules.</span></p></li>
+      <li class="step"><h3><span class="ru">Технологическая разработка</span><span class="en">Technology development</span></h3><p><span class="ru">Постановка задач на систему рассрочки и интеграции с партнёрами.</span><span class="en">Requirements for the installment system and partner integrations.</span></p></li>
+      <li class="step"><h3><span class="ru">Сбор партнёрской базы</span><span class="en">Partner network assembly</span></h3><p><span class="ru">Привлечение магазинов, широкое покрытие ритейла и удержание партнёров.</span><span class="en">Bringing in merchants, broad retail coverage and partner retention.</span></p></li>
+      <li class="step"><h3><span class="ru">Работа с клиентами (физлицами)</span><span class="en">Work with clients (individuals)</span></h3><p><span class="ru">Выдача карты, использование рассрочки, поддержка и возврат клиентов.</span><span class="en">Card issuing, using the installment, support and bringing customers back.</span></p></li>
+      <li class="step"><h3><span class="ru">Маркетинг</span><span class="en">Marketing</span></h3><p><span class="ru">Продвижение продукта среди клиентов и среди партнёров.</span><span class="en">Promoting the product to customers and to partners.</span></p></li>
+      <li class="step"><h3><span class="ru">Аналитика</span><span class="en">Analytics</span></h3><p><span class="ru">Отслеживание партнёров и клиентов, чтобы вовремя замечать проблемы.</span><span class="en">Tracking partners and customers to spot problems in time.</span></p></li>
+    </ol>
+  </div></section>
   <section id="experience"><div class="wrap"></div></section>
   <section id="contact"><div class="wrap"></div></section>
 </main>

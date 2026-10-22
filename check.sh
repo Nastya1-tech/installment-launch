@@ -32,6 +32,11 @@ has '№1' "proof №1"
 has '1 500\+' "proof 1 500+"
 has '2 000\+' "proof 2 000+"
 
+[ "$(grep -o 'class="step"' "$F" | wc -l | tr -d ' ')" -eq 7 ] || { echo "FAIL: cycle must have exactly 7 steps"; exit 1; }
+has 'Аналитика' "RU step Аналитика"
+has 'Analytics' "EN step Analytics"
+if sed -n '/id="problem"/,/<\/section>/p' "$F" | grep -q '80%'; then echo "FAIL: 80% in problem block"; exit 1; fi
+
 hasnt 'https?://' "external URL found"
 hasnt 'кросс|выручк|оборот|cross-sell|revenue' "forbidden word"
 grep -qE '\bNDA\b' "$F" && { echo "FAIL: forbidden word NDA"; exit 1; }
