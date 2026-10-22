@@ -54,4 +54,7 @@ has 'Huggies' "Huggies"
 has '5.7.10' "5-7-10"
 hasnt '<img' "img tag found"
 
+has 'создавала с нуля' "RU wording создавала с нуля"
+hasnt 'построила' "forbidden wording построила"
+
 echo "OK"
