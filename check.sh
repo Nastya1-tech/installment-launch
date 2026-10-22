@@ -57,4 +57,10 @@ hasnt '<img' "img tag found"
 has 'создавала с нуля' "RU wording создавала с нуля"
 hasnt 'построила' "forbidden wording построила"
 
+has 'No\. 1' "EN No. 1"
+has 'Helped launch retail products' "EN Pasha/MAIB line"
+has 'Помогала запускать розничные продукты' "RU Pasha/MAIB line"
+has 'и других' "и других"
+has 'aria-pressed' "aria-pressed"
+
 echo "OK"
