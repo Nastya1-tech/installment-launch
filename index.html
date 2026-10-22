@@ -97,6 +97,11 @@ html[data-lang="en"] #lang-en {
 
 main section { padding: clamp(40px, 8vw, 96px) 0; }
 main section + section { border-top: 1px solid var(--line); }
+
+#offer { padding-top: clamp(48px, 10vw, 120px); }
+#offer h1 { max-width: 16ch; }
+#offer .lead { max-width: 40rem; color: var(--muted); font-size: 1.15em; margin: 0 0 1.5rem; }
+#offer .proof { margin: 1.25rem 0 0; max-width: 40rem; color: var(--muted); font-size: 0.9em; }
 </style>
 </head>
 <body>
@@ -110,7 +115,12 @@ main section + section { border-top: 1px solid var(--line); }
   </div>
 </header>
 <main>
-  <section id="offer"><div class="wrap"></div></section>
+  <section id="offer"><div class="wrap">
+    <h1><span class="ru">Запускаю карты рассрочки для банков</span><span class="en">I launch installment cards for banks</span></h1>
+    <p class="lead"><span class="ru">Помогаю банку собрать партнёрскую сеть с ритейлом и запустить рассрочку, в которой клиент ничего не переплачивает.</span><span class="en">I help banks build a retail partner network and launch an installment product where the customer pays no extra.</span></p>
+    <a class="btn" id="offer-btn" href="mailto:hello@example.com?subject=%D0%97%D0%B0%D0%BF%D1%83%D1%81%D0%BA%20%D1%80%D0%B0%D1%81%D1%81%D1%80%D0%BE%D1%87%D0%BA%D0%B8%3A%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C"><span class="ru">Написать мне</span><span class="en">Write to me</span></a>
+    <p class="proof"><span class="ru">«Халва» — карта рассрочки №1 в Беларуси; экосистемы с 1 500+ и 2 000+ партнёров.</span><span class="en">Halva is the №1 installment card in Belarus; ecosystems with 1,500+ and 2,000+ partners.</span></p>
+  </div></section>
   <section id="problem"><div class="wrap"></div></section>
   <section id="cycle"><div class="wrap"></div></section>
   <section id="experience"><div class="wrap"></div></section>
@@ -139,8 +149,10 @@ function setLang(lang) {
   document.title = m.title;
   var d = document.querySelector('meta[name="description"]');
   if (d) d.setAttribute("content", m.description);
-  var mail = document.getElementById("mail-btn");
-  if (mail) mail.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(m.subject);
+  ["mail-btn", "offer-btn"].forEach(function (id) {
+    var b = document.getElementById(id);
+    if (b) b.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(m.subject);
+  });
 }
 
 document.getElementById("lang-ru").addEventListener("click", function () { setLang("ru"); });

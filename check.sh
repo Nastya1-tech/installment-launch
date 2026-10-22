@@ -23,6 +23,15 @@ has 'title: *"Installment launch for banks"' "META.en.title"
 has 'description: *"[A-Za-z][^"]+"' "META.en.description non-empty English"
 has 'subject: *"[A-Za-z][^"]+"' "META.en.subject non-empty English"
 
+has '<h1' "h1"
+has 'id="offer-btn"' "offer button"
+has 'mailto:hello@example\.com' "mailto"
+has 'Написать мне' "RU button text"
+has 'Write to me' "EN button text"
+has '№1' "proof №1"
+has '1 500\+' "proof 1 500+"
+has '2 000\+' "proof 2 000+"
+
 hasnt 'https?://' "external URL found"
 hasnt 'кросс|выручк|оборот|cross-sell|revenue' "forbidden word"
 grep -qE '\bNDA\b' "$F" && { echo "FAIL: forbidden word NDA"; exit 1; }
