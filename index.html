@@ -16,7 +16,7 @@
   --gutter: clamp(16px, 5vw, 32px);
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
 body {
   margin: 0;
   background: var(--bg);
@@ -58,7 +58,7 @@ html[data-lang="ru"] .en { display: none; }
   cursor: pointer;
 }
 .btn:hover { filter: brightness(1.1); }
-.btn:focus-visible, .lang button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+a:focus-visible, .btn:focus-visible, .lang button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
 
 .site-header {
   position: sticky;
@@ -280,6 +280,10 @@ main section + section { border-top: 1px solid var(--line); }
 #try .q-answer { padding: 0 14px 14px; }
 #try .q-answer p { margin: 0 0 10px; color: var(--muted); }
 #try.js .q:not(.open) .q-answer { display: none; }
+#try:not(.js) .modes { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
 @media (min-width: 720px) { #experience .card.wide { grid-column: 1 / -1; } }
 </style>
 </head>
@@ -316,7 +320,7 @@ main section + section { border-top: 1px solid var(--line); }
       <button type="button" class="mode" id="mode-usual" aria-pressed="true"><span class="ru">Как обычно</span><span class="en">The usual way</span></button>
       <button type="button" class="mode" id="mode-program" aria-pressed="false"><span class="ru">Как в программе</span><span class="en">In the programme</span></button>
     </div>
-    <div class="tiles-wrap"><ul class="tiles" tabindex="0" aria-label="Отрасли / Industries">
+    <div class="tiles-wrap"><ul class="tiles" tabindex="0" aria-label="Отрасли">
       <li class="tile promo"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.2a1 1 0 0 0 1-.8L19 8H6"/><circle cx="9" cy="19" r="1.3"/><circle cx="17" cy="19" r="1.3"/></svg></span><span class="name"><span class="ru">Продукты питания</span><span class="en">Groceries</span></span><span class="badge"><span class="ru">цена со скидкой</span><span class="en">discounted price</span></span><span class="status when-usual"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><span><span class="ru">в рассрочку нельзя</span><span class="en">no installment</span></span></span><span class="status when-prog"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg><span><span class="ru">в рассрочку можно</span><span class="en">installment OK</span></span></span></li>
       <li class="tile"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 21V4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v17M4 21h11M7 7h5v4H7zM14 9h2.5a1.5 1.5 0 0 1 1.5 1.5V16a1.5 1.5 0 0 0 3 0V9l-3-3"/></svg></span><span class="name"><span class="ru">Заправки</span><span class="en">Fuel stations</span></span></li>
       <li class="tile promo"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span><span class="name"><span class="ru">Аптеки</span><span class="en">Pharmacies</span></span><span class="badge"><span class="ru">цена со скидкой</span><span class="en">discounted price</span></span><span class="status when-usual"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><span><span class="ru">в рассрочку нельзя</span><span class="en">no installment</span></span></span><span class="status when-prog"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg><span><span class="ru">в рассрочку можно</span><span class="en">installment OK</span></span></span></li>
@@ -406,6 +410,7 @@ function setLang(lang) {
     var b = document.getElementById(id);
     if (b) b.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(m.subject);
   });
+  document.querySelector("#try .tiles").setAttribute("aria-label", lang === "ru" ? "Отрасли" : "Industries");
   Array.prototype.forEach.call(document.querySelectorAll(".ask-btn"), function (b) {
     var q = b.closest(".q").querySelector(".q-text ." + lang).textContent;
     b.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(m.subject) + "&body=" + encodeURIComponent(q);

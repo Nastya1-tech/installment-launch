@@ -85,4 +85,17 @@ has 'Обсудить на встрече' "RU ask button"
 has 'subject=%D0%97.*&body=' "mailto with subject and body for questions"
 has '"&body=" \+ encodeURIComponent' "setLang updates question mail body"
 
+# MVP-4: без JavaScript и доступность
+has '<section id="try" data-mode="usual"' "no-JS default mode is usual"
+has '#try\.js \.q:not\(\.open\) \.q-answer \{ display: none' "answers hidden only under .js"
+has '#try:not\(\.js\) \.modes \{ display: none' "mode switch hidden without JS"
+hasnt 'class="q-answer"[^>]*hidden' "answers must not be hidden in markup"
+hasnt '<[^>]*id="try"[^>]*class="[^"]*\bjs\b' "js class must come from script, not markup"
+has 'classList\.add\("js"\)' "script adds js class"
+has 'prefers-reduced-motion: reduce' "reduced-motion guard"
+has 'scroll-padding-top' "focus not hidden under sticky header"
+has 'class="tiles" tabindex="0" aria-label=' "tiles strip focusable and labelled"
+has 'tiles"\)\.setAttribute\("aria-label"' "tiles label follows language"
+has 'a:focus-visible' "focus ring on all links"
+
 echo "OK"
