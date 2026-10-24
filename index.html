@@ -526,7 +526,7 @@ Array.prototype.forEach.call(document.querySelectorAll("#try .q-toggle"), functi
     var cur = lang(), t = h._type[cur];
     if (!t) return finish(h);
     h.setAttribute("aria-label", t.text);
-    var step = Math.min(40, 1600 / t.text.length), n = 0;
+    var step = Math.min(80, 3200 / t.text.length), n = 0;
     t.el.style.visibility = "";
     (function tick() {
       if (lang() !== cur) return finish(h);
