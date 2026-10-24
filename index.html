@@ -311,6 +311,8 @@ main section:nth-of-type(even) { background: linear-gradient(180deg, var(--mint)
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+.caret { display: inline-block; width: 3px; height: 0.9em; margin-left: 2px; vertical-align: -0.05em; background: var(--accent); animation: caret-blink .7s steps(1) infinite; }
+@keyframes caret-blink { 50% { opacity: 0; } }
 @media (min-width: 720px) { #experience .card.wide { grid-column: 1 / -1; } }
 </style>
 </head>
@@ -502,6 +504,58 @@ Array.prototype.forEach.call(document.querySelectorAll("#try .q-toggle"), functi
     t.parentNode.classList.toggle("open", open);
   });
 });
+// Заголовки «печатаются», когда попадают в экран
+(function () {
+  if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var heads = document.querySelectorAll("h1, h2");
+  function lang() { return document.documentElement.dataset.lang; }
+  Array.prototype.forEach.call(heads, function (h) {
+    var spans = {};
+    ["ru", "en"].forEach(function (l) {
+      var el = h.querySelector("." + l);
+      if (el) spans[l] = { el: el, text: el.textContent };
+    });
+    h._type = spans;
+    Object.keys(spans).forEach(function (l) { spans[l].el.style.visibility = "hidden"; });
+  });
+  function finish(h) {
+    Object.keys(h._type).forEach(function (l) { var t = h._type[l]; t.el.textContent = t.text; t.el.style.visibility = ""; });
+    h.removeAttribute("aria-label");
+  }
+  function type(h) {
+    var cur = lang(), t = h._type[cur];
+    if (!t) return finish(h);
+    h.setAttribute("aria-label", t.text);
+    var step = Math.min(40, 1600 / t.text.length), n = 0;
+    t.el.style.visibility = "";
+    (function tick() {
+      if (lang() !== cur) return finish(h);
+      n++;
+      t.el.textContent = "";
+      t.el.appendChild(document.createTextNode(t.text.slice(0, n)));
+      if (n < t.text.length) {
+        var caret = document.createElement("span");
+        caret.className = "caret";
+        caret.setAttribute("aria-hidden", "true");
+        t.el.appendChild(caret);
+        var rest = document.createElement("span");
+        rest.style.visibility = "hidden";
+        rest.setAttribute("aria-hidden", "true");
+        rest.textContent = t.text.slice(n);
+        t.el.appendChild(rest);
+        setTimeout(tick, step);
+      } else finish(h);
+    })();
+  }
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      type(e.target);
+    });
+  }, { threshold: 0.6 });
+  Array.prototype.forEach.call(heads, function (h) { io.observe(h); });
+})();
 </script>
 </body>
 </html>
