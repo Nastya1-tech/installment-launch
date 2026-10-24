@@ -32,7 +32,7 @@ has '№1' "proof №1"
 has '1([ ]|&nbsp;| )500\+' "proof 1 500+"
 has '2([ ]|&nbsp;| )000\+' "proof 2 000+"
 
-[ "$(grep -o 'class="step"' "$F" | wc -l | tr -d ' ')" -eq 7 ] || { echo "FAIL: cycle must have exactly 7 steps"; exit 1; }
+[ "$(grep -o 'class="step"' "$F" | wc -l | tr -d ' ')" -eq 8 ] || { echo "FAIL: cycle must have exactly 8 steps"; exit 1; }
 has 'Аналитика' "RU step Аналитика"
 has 'Analytics' "EN step Analytics"
 if sed -n '/id="problem"/,/<\/section>/p' "$F" | grep -q '80%'; then echo "FAIL: 80% in problem block"; exit 1; fi
@@ -41,26 +41,37 @@ hasnt 'https?://' "external URL found"
 hasnt 'кросс|выручк|оборот|cross-sell|revenue' "forbidden word"
 grep -qE '\bNDA\b' "$F" && { echo "FAIL: forbidden word NDA"; exit 1; }
 
-has 'Pasha Bank Georgia' "Pasha Bank Georgia"
-has 'MAIB' "MAIB"
 has 'MTBank' "MTBank"
 has 'Umico' "Umico"
+has 'Грузия и Молдова' "Georgia and Moldova card"
 has '80%' "80%"
 has 'id="mail-btn"' "mail button"
 has 'Анастасия Губаревич' "RU signature"
 has 'Anastasia Gubarevich' "EN signature"
-has 'Nestl' "Nestlé"
-has 'Huggies' "Huggies"
 has '5.7.10' "5-7-10"
-hasnt '<img' "img tag found"
+[ "$(grep -o '<img' "$F" | wc -l | tr -d ' ')" -eq 1 ] || { echo "FAIL: exactly one img (portrait) expected"; exit 1; }
+has 'src="photo.jpg"' "portrait"
 
-has 'создавала с нуля' "RU wording создавала с нуля"
+has '[Сс]оздавала с нуля' "RU wording создавала с нуля"
 hasnt 'построила' "forbidden wording построила"
 
 has 'No\. 1' "EN No. 1"
-has 'Helped launch retail products' "EN Pasha/MAIB line"
-has 'Помогала запускать розничные продукты' "RU Pasha/MAIB line"
-has 'и других' "и других"
 has 'aria-pressed' "aria-pressed"
+
+# MVP «Попробуйте сами»
+has '<section id="try"' "section try"
+[ "$(grep -n '<section id=' "$F" | cut -d'"' -f2 | tr '\n' ' ')" = "offer problem try cycle experience contact " ] || { echo "FAIL: section order must be offer problem try cycle experience contact"; exit 1; }
+has 'id="mode-usual"' "mode usual button"
+has 'id="mode-program"' "mode program button"
+has 'Как обычно' "RU mode usual"
+has 'Как в программе' "RU mode program"
+has 'The usual way' "EN mode usual"
+has 'In the programme' "EN mode program"
+has 'в рассрочку нельзя' "RU not available label"
+has 'в рассрочку можно' "RU available label"
+has 'цена со скидкой' "RU discount label"
+has 'function setMode\(' "setMode function"
+[ "$(sed -n '/id="try"/,/<\/section>/p' "$F" | grep -o 'class="tile' | wc -l | tr -d ' ')" -ge 5 ] || { echo "FAIL: try needs at least 5 tiles"; exit 1; }
+if sed -n '/id="try"/,/<\/section>/p' "$F" | sed 's/<[^>]*>//g' | grep -qE '[0-9]'; then echo "FAIL: digits in try block"; exit 1; fi
 
 echo "OK"

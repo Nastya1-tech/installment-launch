@@ -101,11 +101,10 @@ main section { padding: clamp(40px, 8vw, 96px) 0; }
 main section + section { border-top: 1px solid var(--line); }
 
 #offer { padding-top: clamp(48px, 10vw, 120px); }
-#offer h1 { max-width: 16ch; }
-#offer .lead { max-width: 40rem; color: var(--muted); font-size: 1.15em; margin: 0 0 1.5rem; }
-#offer .proof { margin: 1.25rem 0 0; max-width: 40rem; color: var(--muted); font-size: 0.9em; }
+#offer .lead { color: var(--muted); font-size: 1.15em; margin: 0 0 1.5rem; }
+#offer .proof { margin: 1.25rem 0 0; color: var(--muted); font-size: 0.9em; }
 
-.prose { max-width: 42rem; }
+.prose { }
 .prose p { margin: 0 0 1em; color: var(--muted); }
 .steps {
   list-style: none;
@@ -153,7 +152,7 @@ main section + section { border-top: 1px solid var(--line); }
 .card p { margin: 0 0 0.5em; color: var(--muted); font-size: 0.95em; overflow-wrap: anywhere; }
 .card p:last-child { margin-bottom: 0; }
 .card.ref { background: transparent; }
-.results { margin: 1.5rem 0 0; max-width: 46rem; padding: 16px; border-left: 3px solid var(--accent); background: var(--card); border-radius: 0 8px 8px 0; }
+.results { margin: 1.5rem 0 0; padding: 16px; border-left: 3px solid var(--accent); background: var(--card); border-radius: 0 8px 8px 0; }
 .results p { margin: 0 0 0.5em; overflow-wrap: anywhere; }
 .results p:last-child { margin-bottom: 0; }
 #contact .prose p { color: var(--fg); }
@@ -161,6 +160,112 @@ main section + section { border-top: 1px solid var(--line); }
 @media (min-width: 720px) {
   #experience .cards { grid-template-columns: 1fr 1fr; }
 }
+
+#try .modes { display: flex; flex-wrap: wrap; gap: 8px; margin: 1.5rem 0 0; }
+#try .mode {
+  min-height: 44px;
+  padding: 0 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+#try .mode:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+#try .mode[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+#try .tiles-wrap { position: relative; margin: 1.25rem 0 0; }
+#try .tiles-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 72px;
+  background: linear-gradient(to right, transparent, var(--bg));
+  pointer-events: none;
+}
+#try .tiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+#try .tiles::-webkit-scrollbar { display: none; }
+#try .tiles:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
+#try .tile {
+  flex: 0 0 170px;
+  min-width: 0;
+  padding: 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+#try .tile .ico { margin-bottom: 4px; }
+#try .tile .name { display: block; margin-top: 4px; font-weight: 600; overflow-wrap: anywhere; }
+#try .tile .badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 0 8px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: 0.8em;
+  font-weight: 600;
+}
+#try .tile .status { display: flex; gap: 6px; align-items: flex-start; margin-top: 6px; font-size: 0.85em; color: var(--muted); overflow-wrap: anywhere; }
+#try[data-mode="usual"] .when-prog,
+#try[data-mode="program"] .when-usual { display: none; }
+#try[data-mode="usual"] .tile.promo { opacity: 0.6; }
+
+.ico {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+}
+.ico svg, .map { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ico svg { width: 24px; height: 24px; }
+.points { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 16px; }
+.points li { display: flex; gap: 16px; align-items: flex-start; }
+.points p { margin: 0; color: var(--muted); overflow-wrap: anywhere; }
+.points li:first-child p { color: var(--fg); }
+.market { display: flex; align-items: center; gap: 8px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.fact { display: flex; flex-direction: column; font-size: 0.85em; color: var(--muted); }
+.fact strong { color: var(--accent); font-size: 1.3em; line-height: 1.2; }
+.contact-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.portrait { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; flex: 0 0 auto; }
+.contact-row > div { flex: 1 1 260px; min-width: 0; }
+
+:root { --warn: #e0766b; }
+.ico.sm { width: 32px; height: 32px; }
+.ico.sm svg { width: 18px; height: 18px; }
+.ico.big { width: 52px; height: 52px; }
+.ico.big svg { width: 30px; height: 30px; }
+.proof { display: grid; gap: 10px; }
+.proof-line { display: flex; align-items: center; gap: 12px; }
+.map { flex: none; overflow: visible; fill: rgba(76, 201, 176, 0.18); stroke: var(--accent); stroke-width: 1.4px; stroke-linejoin: round; }
+.map path { vector-effect: non-scaling-stroke; }
+#try[data-mode="usual"] .tile.promo { border-color: var(--warn); }
+#try[data-mode="usual"] .tile.promo .status { color: var(--warn); }
+#try[data-mode="program"] .tile.promo { border-color: var(--accent); }
+#try[data-mode="program"] .tile.promo .status { color: var(--accent); }
+#try .status svg { flex: none; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+@media (min-width: 720px) { #experience .card.wide { grid-column: 1 / -1; } }
 </style>
 </head>
 <body>
@@ -176,26 +281,44 @@ main section + section { border-top: 1px solid var(--line); }
 <main>
   <section id="offer"><div class="wrap">
     <h1><span class="ru">Запускаю карты рассрочки для банков</span><span class="en">I launch installment cards for banks</span></h1>
-    <p class="lead"><span class="ru">Помогаю банку собрать партнёрскую сеть с ритейлом и запустить рассрочку, в которой клиент ничего не переплачивает.</span><span class="en">I help banks build a retail partner network and launch an installment product where the customer pays no extra.</span></p>
+    <p class="lead"><span class="ru">Помогаю банку собрать партнёрскую сеть из ритейла и производителей с широким покрытием — и запустить честную рассрочку для клиента без переплат.</span><span class="en">I help banks build a partner network of retailers and manufacturers with broad coverage — and launch an honest installment product for customers with no overpayment.</span></p>
     <a class="btn" id="offer-btn" href="mailto:hello@example.com?subject=%D0%97%D0%B0%D0%BF%D1%83%D1%81%D0%BA%20%D1%80%D0%B0%D1%81%D1%81%D1%80%D0%BE%D1%87%D0%BA%D0%B8%3A%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C"><span class="ru">Написать мне</span><span class="en">Write to me</span></a>
-    <p class="proof"><span class="ru">«Халва» — карта рассрочки №1 в Беларуси; экосистемы с 1&nbsp;500+ и 2&nbsp;000+ партнёров.</span><span class="en">Halva is the No. 1 installment card in Belarus; ecosystems with 1,500+ and 2,000+ partners.</span></p>
+    <div class="proof"><span class="proof-line"><span class="ico sm"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span class="ru">«Халва» — карта рассрочки №1 в Беларуси, 1&nbsp;500+ партнёров.</span><span class="en">Halva is the No. 1 installment card in Belarus, 1,500+ partners.</span></span></span><span class="proof-line"><span class="ico sm"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span class="ru">«BirEcosystem» — digital-экосистема №1 в Азербайджане с встроенным BNPL, 2&nbsp;000+ партнёров.</span><span class="en">BirEcosystem is the No. 1 digital ecosystem in Azerbaijan with built-in BNPL, 2,000+ partners.</span></span></span></div>
   </div></section>
   <section id="problem"><div class="wrap">
-    <h2><span class="ru">У банка есть всё, кроме партнёров</span><span class="en">The bank has everything except partners</span></h2>
-    <div class="prose">
-      <p><span class="ru">У банка есть деньги, клиентская база и лицензии. Но рассрочка по сути ритейл-продукт: деньги в нём приходят от магазинов, то есть от юридических лиц, а не от физических.</span><span class="en">The bank has the money, the client base and the licences. But installment is essentially a retail product: the money comes from merchants, that is, from legal entities, not from individuals.</span></p>
-      <p><span class="ru">Поэтому нужны партнёрская сеть, широкое покрытие ритейла и удержание партнёров. Магазин, который через три месяца выходит из программы, убивает продукт.</span><span class="en">That takes a partner network, broad retail coverage and partner retention. A merchant who leaves the programme after three months kills the product.</span></p>
-      <p><span class="ru">Классическому банку этого опыта часто не хватает. Рассрочка при этом честная: клиент ничего не переплачивает.</span><span class="en">A classic bank often lacks this experience. The installment itself is honest: the customer pays nothing extra.</span></p>
+    <h2><span class="ru">У банка есть многое, но нет сердца продукта — партнёрской сети!</span><span class="en">The bank has a lot, but not the heart of the product — a partner network!</span></h2>
+    <ul class="points">
+      <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10l9-6 9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18M3 10h18"/></svg></span><p><span class="ru">У банка есть лицензии, фондирование, клиентская база и т. д.</span><span class="en">The bank has licences, funding, a client base and so on.</span></p></li>
+      <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9l1.5-5h13L20 9M4 9a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 6 0 2.5 2.5 0 0 0 5 0M5 12v9h14v-9M10 21v-5h4v5"/></svg></span><p><span class="ru">Но рассрочка (BNPL), по своей сути, — ритейл-продукт! Прямая монетизация идёт от магазинов-партнёров, а не от физических лиц.</span><span class="en">But installment (BNPL) is, in essence, a retail product! Direct monetisation comes from partner merchants, not from individuals.</span></p></li>
+      <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><circle cx="12" cy="12" r="1.5"/><path d="M12 7v3.5M10.8 13.2L6.3 17.4M13.2 13.2l4.5 4.2"/></svg></span><p><span class="ru">Для программы рассрочки (BNPL) критически важны партнёрская сеть, широкое покрытие ритейла и удержание партнёров.</span><span class="en">For an installment (BNPL) programme, a partner network, broad retail coverage and partner retention are critical.</span></p></li>
+      <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14.5c2.5 0 4.5 2 4.5 5"/></svg></span><p><span class="ru">Классическому банку часто не хватает опыта в формировании и удержании партнёрской сети — я помогу.</span><span class="en">A classic bank often lacks experience in building and retaining a partner network. I can help.</span></p></li>
+      <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM8.5 12l2.5 2.5 4.5-5"/></svg></span><p><span class="ru">Очень важно, что покупка в рассрочку для конечного клиента должна быть честной: клиент ничего не переплачивает!</span><span class="en">It is very important that buying on installment is honest for the end customer: the customer pays nothing extra!</span></p></li>
+    </ul>
+  </div></section>
+  <section id="try" data-mode="usual"><div class="wrap">
+    <h2><span class="ru">Попробуйте сами</span><span class="en">Try it yourself</span></h2>
+    <div class="modes">
+      <button type="button" class="mode" id="mode-usual" aria-pressed="true"><span class="ru">Как обычно</span><span class="en">The usual way</span></button>
+      <button type="button" class="mode" id="mode-program" aria-pressed="false"><span class="ru">Как в программе</span><span class="en">In the programme</span></button>
     </div>
+    <div class="tiles-wrap"><ul class="tiles" tabindex="0" aria-label="Отрасли / Industries">
+      <li class="tile promo"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.2a1 1 0 0 0 1-.8L19 8H6"/><circle cx="9" cy="19" r="1.3"/><circle cx="17" cy="19" r="1.3"/></svg></span><span class="name"><span class="ru">Продукты питания</span><span class="en">Groceries</span></span><span class="badge"><span class="ru">цена со скидкой</span><span class="en">discounted price</span></span><span class="status when-usual"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><span><span class="ru">в рассрочку нельзя</span><span class="en">no installment</span></span></span><span class="status when-prog"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg><span><span class="ru">в рассрочку можно</span><span class="en">installment OK</span></span></span></li>
+      <li class="tile"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 21V4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v17M4 21h11M7 7h5v4H7zM14 9h2.5a1.5 1.5 0 0 1 1.5 1.5V16a1.5 1.5 0 0 0 3 0V9l-3-3"/></svg></span><span class="name"><span class="ru">Заправки</span><span class="en">Fuel stations</span></span></li>
+      <li class="tile promo"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span><span class="name"><span class="ru">Аптеки</span><span class="en">Pharmacies</span></span><span class="badge"><span class="ru">цена со скидкой</span><span class="en">discounted price</span></span><span class="status when-usual"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><span><span class="ru">в рассрочку нельзя</span><span class="en">no installment</span></span></span><span class="status when-prog"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg><span><span class="ru">в рассрочку можно</span><span class="en">installment OK</span></span></span></li>
+      <li class="tile promo"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v14H3zM3 9.7h18M3 14.3h18M9 5v4.7M15 9.7v4.6M9 14.3V19"/></svg></span><span class="name"><span class="ru">Строительные материалы</span><span class="en">Building materials</span></span><span class="badge"><span class="ru">цена со скидкой</span><span class="en">discounted price</span></span><span class="status when-usual"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><span><span class="ru">в рассрочку нельзя</span><span class="en">no installment</span></span></span><span class="status when-prog"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg><span><span class="ru">в рассрочку можно</span><span class="en">installment OK</span></span></span></li>
+      <li class="tile"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 3h12l3 5-9 13L3 8zM3 8h18M9 3L8 8l4 13 4-13-1-5"/></svg></span><span class="name"><span class="ru">Ювелирные изделия</span><span class="en">Jewellery</span></span></li>
+      <li class="tile" aria-hidden="true"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v5H3zM6 18v2M18 18v2"/></svg></span><span class="name"><span class="ru">Мебель</span><span class="en">Furniture</span></span></li>
+    </ul></div>
   </div></section>
   <section id="cycle"><div class="wrap">
     <h2><span class="ru">Что я делаю: полный цикл запуска</span><span class="en">What I do: the full launch cycle</span></h2>
     <ol class="steps">
+      <li class="step"><h3><span class="ru">Анализ рынка и текущей ситуации</span><span class="en">Market and current-situation analysis</span></h3><p><span class="ru">Рынок, конкуренты, возможности банка и точка старта.</span><span class="en">The market, competitors, the bank’s capabilities and the starting point.</span></p></li>
       <li class="step"><h3><span class="ru">Юридическая база</span><span class="en">Legal framework</span></h3><p><span class="ru">Договоры, условия продукта и требования регулятора.</span><span class="en">Contracts, product terms and regulatory requirements.</span></p></li>
       <li class="step"><h3><span class="ru">Построение продукта</span><span class="en">Product building</span></h3><p><span class="ru">Условия для клиента и партнёра, процессы и правила работы.</span><span class="en">Terms for the customer and the partner, processes and operating rules.</span></p></li>
       <li class="step"><h3><span class="ru">Технологическая разработка</span><span class="en">Technology development</span></h3><p><span class="ru">Постановка задач на систему рассрочки и интеграции с партнёрами.</span><span class="en">Requirements for the installment system and partner integrations.</span></p></li>
-      <li class="step"><h3><span class="ru">Сбор партнёрской базы</span><span class="en">Partner network assembly</span></h3><p><span class="ru">Привлечение магазинов, широкое покрытие ритейла и удержание партнёров.</span><span class="en">Bringing in merchants, broad retail coverage and partner retention.</span></p></li>
-      <li class="step"><h3><span class="ru">Работа с клиентами (физлицами)</span><span class="en">Work with clients (individuals)</span></h3><p><span class="ru">Выдача карты, использование рассрочки, поддержка и удержание клиентов.</span><span class="en">Card issuing, using the installment, support and customer retention.</span></p></li>
+      <li class="step"><h3><span class="ru">Формирование партнёрской базы (B2B)</span><span class="en">Building the partner base (B2B)</span></h3><p><span class="ru">Привлечение магазинов, широкое покрытие ритейла и удержание партнёров.</span><span class="en">Bringing in merchants, broad retail coverage and partner retention.</span></p></li>
+      <li class="step"><h3><span class="ru">Формирование клиентской базы и CRM (B2C)</span><span class="en">Building the client base and CRM (B2C)</span></h3><p><span class="ru">Выдача карты, использование рассрочки, поддержка и удержание клиентов.</span><span class="en">Card issuing, using the installment, support and customer retention.</span></p></li>
       <li class="step"><h3><span class="ru">Маркетинг</span><span class="en">Marketing</span></h3><p><span class="ru">Продвижение продукта среди клиентов и среди партнёров.</span><span class="en">Promoting the product to customers and to partners.</span></p></li>
       <li class="step"><h3><span class="ru">Аналитика</span><span class="en">Analytics</span></h3><p><span class="ru">Отслеживание партнёров и клиентов, чтобы вовремя замечать проблемы.</span><span class="en">Tracking partners and customers to spot problems in time.</span></p></li>
     </ol>
@@ -203,10 +326,9 @@ main section + section { border-top: 1px solid var(--line); }
   <section id="experience"><div class="wrap">
     <h2><span class="ru">Опыт: четыре рынка</span><span class="en">Experience: four markets</span></h2>
     <div class="cards">
-      <article class="card"><p class="market"><span class="ru">Беларусь</span><span class="en">Belarus</span></p><h3>MTBank</h3><p><span class="ru">С 2011 года. Входила в первую команду, которая строила розничный бизнес банка.</span><span class="en">Since 2011. I was part of the first team building the bank's retail business.</span></p><p><span class="ru">«Халва» — карта рассрочки №1 в Беларуси. «Халва Плюс» — коалиционная программа лояльности, 1&nbsp;500+ партнёров.</span><span class="en">Halva is the No. 1 installment card in Belarus. Halva Plus is a coalition loyalty programme with 1,500+ partners.</span></p></article>
-      <article class="card"><p class="market"><span class="ru">Азербайджан</span><span class="en">Azerbaijan</span></p><h3>Umico / Bir</h3><p><span class="ru">5+ лет, создавала с нуля. Первая цифровая экосистема в стране с рассрочкой внутри.</span><span class="en">5+ years, created from scratch. The first digital ecosystem in the country with installment inside.</span></p><p><span class="ru">2&nbsp;000+ партнёров: от небольших магазинов до Coca-Cola, Procter &amp; Gamble, Nestlé, Huggies и других.</span><span class="en">2,000+ partners: from small shops to Coca-Cola, Procter &amp; Gamble, Nestlé, Huggies and others.</span></p></article>
-      <article class="card ref"><p class="market"><span class="ru">Грузия</span><span class="en">Georgia</span></p><h3>Pasha Bank Georgia</h3><p><span class="ru">Помогала запускать розничные продукты.</span><span class="en">Helped launch retail products.</span></p></article>
-      <article class="card ref"><p class="market"><span class="ru">Молдова</span><span class="en">Moldova</span></p><h3>MAIB</h3><p><span class="ru">Крупнейший банк страны.</span><span class="en">The largest bank in the country.</span></p><p><span class="ru">Помогала запускать розничные продукты.</span><span class="en">Helped launch retail products.</span></p></article>
+      <article class="card"><p class="market"><svg class="map" viewBox="0 0 100.0 85.5" width="44" height="38" role="img" aria-label="Belarus"><path d="M3.0 39.8 L13.2 39.9 L24.6 33.3 L27.1 23.3 L35.7 17.7 L34.7 9.8 L41.1 6.8 L52.4 0.0 L63.5 4.4 L65.0 8.8 L70.5 6.7 L80.8 10.9 L81.9 19.2 L79.6 23.9 L86.2 35.5 L90.5 38.7 L89.9 41.9 L97.0 45.0 L100.0 49.7 L95.9 53.5 L87.4 52.9 L85.4 54.6 L87.8 60.4 L90.4 71.7 L81.4 72.8 L78.2 76.6 L77.5 85.5 L73.3 83.8 L63.8 84.7 L61.0 80.5 L57.1 83.6 L53.1 81.1 L44.8 80.7 L33.1 76.5 L22.4 75.1 L14.3 75.5 L8.5 80.3 L3.5 81.0 L3.2 73.1 L0.0 64.9 L6.3 61.3 L6.4 54.3 L3.5 47.6 L3.0 39.8Z"/></svg><span class="ru">Беларусь · Минск</span><span class="en">Belarus · Minsk</span></p><h3>MTBank: «Халва» и «Халва Плюс»</h3><p class="facts"><span class="fact"><strong>2011</strong><span class="ru">старт розницы</span><span class="en">retail launch</span></span><span class="fact"><strong>1&nbsp;500+</strong><span class="ru">партнёров</span><span class="en">partners</span></span><span class="fact"><strong>TOP-5</strong><span class="ru">розничных банков</span><span class="en">retail banks</span></span></p><p><span class="ru">Была в самой первой команде менеджеров, которая строила розничный бизнес банка. Мы запустили «Халву» — первую в Беларуси карту рассрочки, и коалиционную программу лояльности «Халва Плюс». А ещё банкострахование, депозиты, розничные кредиты; к 2018 году вошли в топ-5 розничных банков страны.</span><span class="en">I was in the very first team of managers that built the bank's retail business. We launched Halva, the first installment card in Belarus, and the Halva Plus coalition loyalty programme. We also launched bancassurance, deposits and retail loans, and by 2018 became a top-5 retail bank in the country.</span></p></article>
+      <article class="card"><p class="market"><svg class="map" viewBox="0 0 100.0 83.9" width="44" height="37" role="img" aria-label="Azerbaijan"><path d="M3.7 49.6 L9.0 55.8 L16.9 55.8 L16.8 59.4 L24.1 72.9 L11.9 69.8 L2.8 59.0 L0.0 50.2 L3.7 49.6Z M46.1 15.0 L54.0 16.6 L57.0 10.6 L67.7 1.2 L77.1 13.5 L86.2 30.1 L94.5 31.2 L100.0 37.5 L85.3 39.4 L82.2 57.5 L79.1 65.7 L72.6 71.2 L73.0 82.7 L68.6 83.9 L57.5 71.7 L63.6 60.1 L58.3 53.2 L51.6 55.0 L30.6 72.2 L30.2 56.0 L22.2 52.2 L14.6 45.8 L19.6 38.4 L10.1 30.4 L13.7 24.5 L6.9 20.5 L3.2 14.3 L7.6 10.5 L20.9 17.2 L30.5 18.6 L32.9 15.9 L24.1 3.2 L28.8 0.0 L33.8 0.8 L46.1 15.0Z"/></svg><span class="ru">Азербайджан · Баку</span><span class="en">Azerbaijan · Baku</span></p><h3>Umico / Bir: цифровая экосистема</h3><p class="facts"><span class="fact"><strong>5+</strong><span class="ru">лет в проекте</span><span class="en">years in the project</span></span><span class="fact"><strong>2&nbsp;000+</strong><span class="ru">партнёров</span><span class="en">partners</span></span><span class="fact"><strong>№1</strong><span class="ru">digital ecosystem</span><span class="en">digital ecosystem</span></span></p><p><span class="ru">Создавала с нуля первую в Азербайджане цифровую экосистему, которая объединила программу лояльности, маркетплейс и банки. Партнёрская база — весь ритейл страны, от небольших магазинов до международных брендов.</span><span class="en">I created from scratch the first digital ecosystem in Azerbaijan, which brought together a loyalty programme, a marketplace and banks. The partner base is the whole retail of the country, from small shops to international brands.</span></p></article>
+      <article class="card ref wide"><p class="market"><svg class="map" viewBox="0 0 100.0 50.3" width="44" height="22" role="img" aria-label="Georgia"><path d="M23.9 40.7 L26.2 32.1 L22.4 18.3 L13.8 10.9 L5.5 8.6 L0.0 2.4 L1.8 0.0 L14.5 3.5 L36.5 6.7 L56.9 16.4 L59.5 20.2 L68.6 17.0 L82.5 21.2 L87.1 29.5 L96.5 34.2 L92.6 37.0 L100.0 47.9 L98.0 50.3 L89.9 49.1 L78.7 43.2 L75.1 46.5 L54.3 49.7 L39.9 39.8 L23.9 40.7Z"/></svg><svg class="map" viewBox="0 0 77.9 100.0" width="34" height="44" role="img" aria-label="Moldova"><path d="M0.0 8.3 L5.5 3.3 L20.7 0.0 L37.5 10.5 L46.9 11.7 L57.3 20.7 L55.6 32.1 L64.0 37.6 L67.3 51.6 L75.2 60.2 L73.6 65.2 L77.9 68.6 L71.8 71.1 L58.4 70.1 L56.1 65.4 L51.3 68.1 L52.9 74.1 L46.7 84.8 L42.7 96.4 L36.9 100.0 L32.8 84.7 L35.2 70.3 L34.5 55.6 L21.3 35.7 L14.1 21.5 L7.0 11.5 L0.0 8.3Z"/></svg><span class="ru">Грузия и Молдова</span><span class="en">Georgia and Moldova</span></p><p><span class="ru">Консалтинговые проекты: помогаю банкам запускать розницу и строить работу с клиентами.</span><span class="en">Consulting projects: I help banks launch retail and build their work with customers.</span></p></article>
     </div>
     <div class="results">
       <p><span class="ru">Около 80% покрытия ритейла на каждом рынке.</span><span class="en">About 80% retail coverage in each market.</span></p>
@@ -215,10 +337,15 @@ main section + section { border-top: 1px solid var(--line); }
     </div>
   </div></section>
   <section id="contact"><div class="wrap">
-    <h2><span class="ru">Обсудим запуск</span><span class="en">Let's discuss a launch</span></h2>
-    <div class="prose"><p><span class="ru">Расскажите коротко о банке и рынке, и я отвечу, с чего можно начать.</span><span class="en">Tell me briefly about your bank and market, and I will reply with where to start.</span></p></div>
+    <div class="contact-row">
+    <img class="portrait" src="photo.jpg" width="120" height="120" alt="Анастасия Губаревич / Anastasia Gubarevich">
+    <div>
+    <h2><span class="ru">Обсудим запуск?</span><span class="en">Let's discuss a launch?</span></h2>
+    <div class="prose"><p><span class="ru">Расскажите коротко о банке и рынке — и я отвечу, с чего можно начать!</span><span class="en">Tell me briefly about your bank and market, and I will reply with where to start!</span></p></div>
     <a class="btn" id="mail-btn" href="mailto:hello@example.com?subject=%D0%97%D0%B0%D0%BF%D1%83%D1%81%D0%BA%20%D1%80%D0%B0%D1%81%D1%81%D1%80%D0%BE%D1%87%D0%BA%D0%B8%3A%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C"><span class="ru">Написать мне</span><span class="en">Write to me</span></a>
     <p class="sign"><span class="ru">Анастасия Губаревич</span><span class="en">Anastasia Gubarevich</span></p>
+    </div>
+    </div>
   </div></section>
 </main>
 <script>
@@ -254,6 +381,15 @@ function setLang(lang) {
 
 document.getElementById("lang-ru").addEventListener("click", function () { setLang("ru"); });
 document.getElementById("lang-en").addEventListener("click", function () { setLang("en"); });
+
+function setMode(mode) {
+  if (mode !== "usual" && mode !== "program") mode = "usual";
+  document.getElementById("try").dataset.mode = mode;
+  document.getElementById("mode-usual").setAttribute("aria-pressed", mode === "usual" ? "true" : "false");
+  document.getElementById("mode-program").setAttribute("aria-pressed", mode === "program" ? "true" : "false");
+}
+document.getElementById("mode-usual").addEventListener("click", function () { setMode("usual"); });
+document.getElementById("mode-program").addEventListener("click", function () { setMode("program"); });
 </script>
 </body>
 </html>
