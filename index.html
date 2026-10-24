@@ -7,12 +7,13 @@
 <meta name="description" content="Помогу банку запустить карту рассрочки и построить вокруг неё партнёрскую сеть.">
 <style>
 :root {
-  --bg: #0b0f14;
-  --fg: #e6edf3;
-  --muted: #9aa7b4;
-  --accent: #4cc9b0;
-  --card: #121922;
-  --line: #243040;
+  --bg: #fbfaf7;
+  --fg: #26323d;
+  --muted: #5d6b78;
+  --accent: #0b7a67;
+  --accent-soft: #e4f3ef;
+  --card: #ffffff;
+  --line: #e6e9ec;
   --gutter: clamp(16px, 5vw, 32px);
 }
 * { box-sizing: border-box; }
@@ -51,7 +52,7 @@ html[data-lang="ru"] .en { display: none; }
   border: 1px solid var(--accent);
   border-radius: 8px;
   background: var(--accent);
-  color: #06201a;
+  color: #ffffff;
   font: inherit;
   font-weight: 600;
   text-decoration: none;
@@ -64,7 +65,7 @@ a:focus-visible, .btn:focus-visible, .lang button:focus-visible { outline: 2px s
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(11, 15, 20, 0.92);
+  background: rgba(251, 250, 247, 0.92);
   border-bottom: 1px solid var(--line);
 }
 .site-header .wrap {
@@ -97,8 +98,9 @@ html[data-lang="en"] #lang-en {
   text-underline-offset: 4px;
 }
 
-main section { padding: clamp(40px, 8vw, 96px) 0; }
-main section + section { border-top: 1px solid var(--line); }
+main section { padding: clamp(48px, 9vw, 112px) 0; }
+main section + section { border-top: 0; }
+main section:nth-of-type(even) { background: #f4f2ec; }
 
 #offer { padding-top: clamp(48px, 10vw, 120px); }
 #offer .lead { color: var(--muted); font-size: 1.15em; margin: 0 0 1.5rem; }
@@ -121,7 +123,7 @@ main section + section { border-top: 1px solid var(--line); }
   padding: 16px 16px 16px 64px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 14px;
   min-width: 0;
 }
 .step::before {
@@ -146,7 +148,7 @@ main section + section { border-top: 1px solid var(--line); }
 }
 
 #experience .cards { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 1.5rem 0 0; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; min-width: 0; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; min-width: 0; }
 .card h3 { font-size: 1.1em; margin: 0 0 0.2em; overflow-wrap: anywhere; }
 .card .market { margin: 0 0 0.6em; color: var(--accent); font-size: 0.85em; font-weight: 600; }
 .card p { margin: 0 0 0.5em; color: var(--muted); font-size: 0.95em; overflow-wrap: anywhere; }
@@ -204,10 +206,10 @@ main section + section { border-top: 1px solid var(--line); }
 #try .tile {
   flex: 0 0 170px;
   min-width: 0;
-  padding: 14px;
+  padding: 16px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 14px;
 }
 #try .tile .ico { margin-bottom: 4px; }
 #try .tile .name { display: block; margin-top: 4px; font-weight: 600; overflow-wrap: anywhere; }
@@ -224,7 +226,6 @@ main section + section { border-top: 1px solid var(--line); }
 #try .tile .status { display: flex; gap: 6px; align-items: flex-start; margin-top: 6px; font-size: 0.85em; color: var(--muted); overflow-wrap: anywhere; }
 #try[data-mode="usual"] .when-prog,
 #try[data-mode="program"] .when-usual { display: none; }
-#try[data-mode="usual"] .tile.promo { opacity: 0.6; }
 
 .ico {
   flex: 0 0 auto;
@@ -251,18 +252,18 @@ main section + section { border-top: 1px solid var(--line); }
 .portrait { width: 120px; height: 120px; border-radius: 50%; border: 2px solid var(--accent); object-fit: cover; flex: 0 0 auto; }
 .contact-row > div { flex: 1 1 260px; min-width: 0; }
 
-:root { --warn: #e0766b; }
+:root { --warn: #9a6a2f; --warn-soft: #fbf1e0; }
 .ico.sm { width: 32px; height: 32px; }
 .ico.sm svg { width: 18px; height: 18px; }
 .ico.big { width: 52px; height: 52px; }
 .ico.big svg { width: 30px; height: 30px; }
 .proof { display: grid; gap: 10px; }
 .proof-line { display: flex; align-items: center; gap: 12px; }
-.map { flex: none; overflow: visible; fill: rgba(76, 201, 176, 0.18); stroke: var(--accent); stroke-width: 1.4px; stroke-linejoin: round; }
+.map { flex: none; overflow: visible; fill: rgba(11, 122, 103, 0.14); stroke: var(--accent); stroke-width: 1.4px; stroke-linejoin: round; }
 .map path { vector-effect: non-scaling-stroke; }
-#try[data-mode="usual"] .tile.promo { border-color: var(--warn); }
+#try[data-mode="usual"] .tile.promo { background: var(--warn-soft); border-color: transparent; }
 #try[data-mode="usual"] .tile.promo .status { color: var(--warn); }
-#try[data-mode="program"] .tile.promo { border-color: var(--accent); }
+#try[data-mode="program"] .tile.promo { background: var(--accent-soft); border-color: transparent; }
 #try[data-mode="program"] .tile.promo .status { color: var(--accent); }
 #try .status svg { flex: none; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 #try .more { margin: 2rem 0 0.75rem; font-weight: 600; }
@@ -270,7 +271,7 @@ main section + section { border-top: 1px solid var(--line); }
 #try .more .pt { display: inline-block; width: 24px; height: 24px; vertical-align: -6px; fill: none; stroke: var(--accent); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 #try .more .pt.down { transform: rotate(180deg); }
 #try .qs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-#try .q { background: var(--card); border: 1px solid var(--line); border-radius: 8px; }
+#try .q { background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
 #try .q-toggle { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 10px 14px; background: none; border: 0; color: var(--fg); font: inherit; text-align: left; cursor: pointer; }
 #try .q-toggle:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
 #try .q-text { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
