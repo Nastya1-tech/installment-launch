@@ -311,8 +311,10 @@ main section:nth-of-type(even) { background: linear-gradient(180deg, var(--mint)
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
-.caret { display: inline-block; width: 3px; height: 0.9em; margin-left: 2px; vertical-align: -0.05em; background: var(--accent); animation: caret-blink .7s steps(1) infinite; }
+.caret { display: inline-block; width: 2px; height: 0.9em; margin-left: 4px; vertical-align: -0.05em; background: var(--accent); animation: caret-blink .7s steps(1) infinite; }
+.caret.done { animation: caret-blink .7s steps(1) 3, caret-fade .3s ease 2.1s forwards; }
 @keyframes caret-blink { 50% { opacity: 0; } }
+@keyframes caret-fade { to { opacity: 0; } }
 @media (min-width: 720px) { #experience .card.wide { grid-column: 1 / -1; } }
 </style>
 </head>
@@ -526,7 +528,7 @@ Array.prototype.forEach.call(document.querySelectorAll("#try .q-toggle"), functi
     var cur = lang(), t = h._type[cur];
     if (!t) return finish(h);
     h.setAttribute("aria-label", t.text);
-    var step = Math.min(80, 3200 / t.text.length), n = 0;
+    var step = 170, n = 0;
     t.el.style.visibility = "";
     (function tick() {
       if (lang() !== cur) return finish(h);
@@ -544,7 +546,15 @@ Array.prototype.forEach.call(document.querySelectorAll("#try .q-toggle"), functi
         rest.textContent = t.text.slice(n);
         t.el.appendChild(rest);
         setTimeout(tick, step);
-      } else finish(h);
+      } else {
+        var end = document.createElement("span");
+        end.className = "caret done";
+        end.setAttribute("aria-hidden", "true");
+        t.el.textContent = t.text;
+        t.el.appendChild(end);
+        h.removeAttribute("aria-label");
+        setTimeout(function () { end.remove(); }, 2400);
+      }
     })();
   }
   var io = new IntersectionObserver(function (es) {
