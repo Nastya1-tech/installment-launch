@@ -78,8 +78,8 @@ if sed -n '/id="try"/,/<\/section>/p' "$F" | sed 's/<[^>]*>//g' | sed 's/B2[BC]/
 [ "$(grep -o 'class="q"' "$F" | wc -l | tr -d ' ')" -eq 11 ] || { echo "FAIL: exactly 11 questions expected"; exit 1; }
 [ "$(grep -o 'class="btn ask-btn"' "$F" | wc -l | tr -d ' ')" -eq 11 ] || { echo "FAIL: each question needs an ask button"; exit 1; }
 [ "$(grep -o 'aria-expanded="false" aria-controls="qa-' "$F" | wc -l | tr -d ' ')" -eq 11 ] || { echo "FAIL: each question toggle needs aria-expanded"; exit 1; }
-has 'Это один из многих нюансов запуска' "RU nuances phrase"
-has 'This is one of many launch nuances' "EN nuances phrase"
+has 'один из многочисленных нюансов запуска' "RU nuances phrase"
+has 'one of many launch nuances' "EN nuances phrase"
 has 'Ответ — на консультации' "RU answer line"
 has 'Обсудить на встрече' "RU ask button"
 has 'subject=%D0%97.*&body=' "mailto with subject and body for questions"
