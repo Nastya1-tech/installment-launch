@@ -7,20 +7,21 @@
 <meta name="description" content="Помогу банку запустить карту рассрочки и построить вокруг неё партнёрскую сеть.">
 <style>
 :root {
-  --bg: #fbfaf7;
+  --bg: #e3f4ee;
   --fg: #26323d;
   --muted: #5d6b78;
   --accent: #0b7a67;
   --accent-soft: #e4f3ef;
   --card: #ffffff;
-  --line: #e6e9ec;
+  --line: #c9e3da;
   --gutter: clamp(16px, 5vw, 32px);
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
 body {
   margin: 0;
-  background: var(--bg);
+  min-height: 100vh;
+  background: var(--bg) linear-gradient(165deg, #d3efe5 0%, #e9f7f1 35%, #f3fbf8 55%, #d9f0e7 80%, #c6e8dc 100%);
   color: var(--fg);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
@@ -65,7 +66,8 @@ a:focus-visible, .btn:focus-visible, .lang button:focus-visible { outline: 2px s
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(251, 250, 247, 0.92);
+  background: rgba(227, 244, 238, 0.9);
+  backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
 }
 .site-header .wrap {
@@ -100,7 +102,6 @@ html[data-lang="en"] #lang-en {
 
 main section { padding: clamp(48px, 9vw, 112px) 0; }
 main section + section { border-top: 0; }
-main section:nth-of-type(even) { background: #f4f2ec; }
 
 #offer { padding-top: clamp(48px, 10vw, 120px); }
 #offer .lead { color: var(--muted); font-size: 1.15em; margin: 0 0 1.5rem; }
@@ -184,14 +185,6 @@ main section:nth-of-type(even) { background: #f4f2ec; }
   text-underline-offset: 4px;
 }
 #try .tiles-wrap { position: relative; margin: 1.25rem 0 0; }
-#try .tiles-wrap::after {
-  content: "";
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  width: 72px;
-  background: linear-gradient(to right, transparent, var(--bg));
-  pointer-events: none;
-}
 #try .tiles {
   list-style: none;
   margin: 0;
@@ -200,18 +193,30 @@ main section:nth-of-type(even) { background: #f4f2ec; }
   gap: 12px;
   overflow-x: auto;
   scrollbar-width: none;
+  padding: 8px 4px 14px;
+  margin: -8px -4px 0;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 64px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 64px), transparent);
+}
+@media (min-width: 1000px) {
+  #try .tiles { -webkit-mask-image: none; mask-image: none; overflow: visible; }
 }
 #try .tiles::-webkit-scrollbar { display: none; }
 #try .tiles:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
 #try .tile {
-  flex: 0 0 170px;
+  flex: 1 0 150px;
   min-width: 0;
-  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity .2s, box-shadow .2s, background .2s;
+  padding: 18px 12px;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 16px;
 }
-#try .tile .ico { margin-bottom: 4px; }
+#try .tile .ico { margin-bottom: 4px; background: var(--accent-soft); }
 #try .tile .name { display: block; margin-top: 4px; font-weight: 600; overflow-wrap: anywhere; }
 #try .tile .badge {
   display: inline-block;
@@ -223,7 +228,7 @@ main section:nth-of-type(even) { background: #f4f2ec; }
   font-size: 0.8em;
   font-weight: 600;
 }
-#try .tile .status { display: flex; gap: 6px; align-items: flex-start; margin-top: 6px; font-size: 0.85em; color: var(--muted); overflow-wrap: anywhere; }
+#try .tile .status { display: flex; gap: 6px; align-items: flex-start; text-align: left; margin-top: 6px; font-size: 0.85em; color: var(--muted); overflow-wrap: anywhere; }
 #try[data-mode="usual"] .when-prog,
 #try[data-mode="program"] .when-usual { display: none; }
 
@@ -261,9 +266,11 @@ main section:nth-of-type(even) { background: #f4f2ec; }
 .proof-line { display: flex; align-items: center; gap: 12px; }
 .map { flex: none; overflow: visible; fill: rgba(11, 122, 103, 0.14); stroke: var(--accent); stroke-width: 1.4px; stroke-linejoin: round; }
 .map path { vector-effect: non-scaling-stroke; }
-#try[data-mode="usual"] .tile.promo { background: var(--warn-soft); border-color: transparent; }
-#try[data-mode="usual"] .tile.promo .status { color: var(--warn); }
-#try[data-mode="program"] .tile.promo { background: var(--accent-soft); border-color: transparent; }
+#try .tile { border-color: transparent; box-shadow: 0 6px 22px rgba(11, 122, 103, 0.18); }
+#try[data-mode="usual"] .tile.promo { background: rgba(255, 255, 255, 0.45); box-shadow: none; opacity: 0.6; }
+#try[data-mode="usual"] .tile.promo .ico { background: transparent; border-color: #8a9aa6; color: #8a9aa6; }
+#try[data-mode="usual"] .tile.promo .status { color: var(--muted); }
+#try[data-mode="program"] .tile.promo { background: var(--card); }
 #try[data-mode="program"] .tile.promo .status { color: var(--accent); }
 #try .status svg { flex: none; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 #try .more { margin: 2rem 0 0.75rem; font-weight: 600; }
@@ -271,7 +278,7 @@ main section:nth-of-type(even) { background: #f4f2ec; }
 #try .more .pt { display: inline-block; width: 24px; height: 24px; vertical-align: -6px; fill: none; stroke: var(--accent); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 #try .more .pt.down { transform: rotate(180deg); }
 #try .qs { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-#try .q { background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+#try .q { background: rgba(255, 255, 255, 0.85); border: 1px solid var(--line); border-radius: 12px; }
 #try .q-toggle { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 44px; padding: 10px 14px; background: none; border: 0; color: var(--fg); font: inherit; text-align: left; cursor: pointer; }
 #try .q-toggle:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
 #try .q-text { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
