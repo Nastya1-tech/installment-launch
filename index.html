@@ -188,72 +188,60 @@ main section:nth-of-type(even) { background: linear-gradient(180deg, var(--mint)
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-#try .tiles-wrap { position: relative; margin: 1.25rem 0 0; }
+#try .tiles-wrap {
+  position: relative;
+  margin: 1.25rem 0 0;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: background .3s, box-shadow .3s;
+}
 #try .tiles {
   list-style: none;
   margin: 0;
-  padding: 6px 4px 14px;
+  padding: 18px 0 14px 12px;
   display: flex;
-  gap: 12px;
   overflow-x: auto;
   scrollbar-width: none;
-  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
-  mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
 }
 #try .tiles::-webkit-scrollbar { display: none; }
-#try .tiles:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px; }
-@media (min-width: 1000px) {
-  #try .tiles { overflow: visible; -webkit-mask-image: none; mask-image: none; }
-}
+#try .tiles:focus-visible { outline: 2px solid var(--fg); outline-offset: -4px; border-radius: 20px; }
 #try .tile {
-  flex: 1 1 0;
-  min-width: 124px;
-  padding: 16px 8px;
-  background: var(--card);
-  border-radius: 16px;
+  flex: 0 0 128px;
+  padding: 4px 8px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  transition: opacity .3s, box-shadow .3s, background .3s;
 }
 #try .tile .name { display: block; font-weight: 600; font-size: 0.9em; overflow-wrap: break-word; }
 #try .verdict {
   position: relative;
-  margin: 10px 0 0;
-  padding: 18px 16px;
+  padding: 16px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 10px 18px;
-  border-radius: 16px;
+  border-top: 1px solid rgba(5, 8, 6, 0.14);
   font-size: 1.1em;
   font-weight: 700;
-  transition: background .3s, box-shadow .3s;
-}
-#try .verdict::before {
-  content: "";
-  position: absolute;
-  left: 3%; right: 3%; top: -10px;
-  height: 10px;
-  border: 2px solid var(--fg);
-  border-top: 0;
-  border-radius: 0 0 10px 10px;
-  opacity: 0.55;
 }
 #try .verdict .badge { padding: 2px 12px; border: 1.5px solid currentColor; border-radius: 999px; font-size: 0.8em; font-weight: 600; }
 #try .verdict .status { display: flex; align-items: center; gap: 8px; }
 #try .verdict .status svg { width: 24px; height: 24px; }
 #try[data-mode="usual"] .when-prog,
 #try[data-mode="program"] .when-usual { display: none; }
-#try[data-mode="usual"] .tile { background: rgba(255, 255, 255, 0.45); opacity: 0.85; }
+#try[data-mode="usual"] .tile { opacity: 0.8; }
 #try[data-mode="usual"] .tile .ico { background: transparent; border-color: #3d4a52; color: #3d4a52; }
-#try[data-mode="usual"] .verdict { background: rgba(255, 255, 255, 0.55); color: #1b242a; }
-#try[data-mode="program"] .tile { box-shadow: 0 8px 26px rgba(4, 80, 63, 0.3); }
+#try[data-mode="usual"] .verdict { color: #1b242a; }
+#try[data-mode="program"] .tiles-wrap { background: #fff; box-shadow: 0 10px 30px rgba(3, 59, 48, 0.3); }
 #try[data-mode="program"] .tile .ico { background: var(--accent-soft); }
-#try[data-mode="program"] .verdict { background: #fff; color: var(--accent); box-shadow: 0 8px 26px rgba(4, 80, 63, 0.3); }
+#try[data-mode="program"] .verdict { color: var(--accent); }
+#try .confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
 
 .ico {
   flex: 0 0 auto;
@@ -354,12 +342,15 @@ main section:nth-of-type(even) { background: linear-gradient(180deg, var(--mint)
       <li class="tile"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v5H3zM6 18v2M18 18v2"/></svg></span><span class="name"><span class="ru">Мебель</span><span class="en">Furniture</span></span></li>
       <li class="tile"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v11H3zM8 20h8M12 16v4"/></svg></span><span class="name"><span class="ru">Электроника</span><span class="en">Electronics</span></span></li>
       <li class="tile"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 4l-6 3 2 4 2-1v10h10V10l2 1 2-4-6-3a3 3 0 0 1-6 0z"/></svg></span><span class="name"><span class="ru">Одежда</span><span class="en">Clothing</span></span></li>
-    </ul></div>
+    
+      <li class="tile"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 13l2-6h14l2 6v5h-3v-2H6v2H3zM3 13h18"/></svg></span><span class="name"><span class="ru">Авто</span><span class="en">Cars</span></span></li>
+      <li class="tile"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 12l20-8-8 20-3-9z"/></svg></span><span class="name"><span class="ru">Путешествия</span><span class="en">Travel</span></span></li>
+    </ul>
     <div class="verdict" aria-live="polite">
       <span class="badge"><span class="ru">цена со скидкой</span><span class="en">discounted price</span></span>
       <span class="status when-usual"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg><span><span class="ru">в рассрочку нельзя</span><span class="en">no installment</span></span></span>
       <span class="status when-prog"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg><span><span class="ru">в рассрочку можно</span><span class="en">installment OK</span></span></span>
-    </div>
+    </div></div>
     <p class="more"><span class="ru"><svg class="pt up" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 11V4.5a1.5 1.5 0 0 1 3 0V10.5M12 10a1.5 1.5 0 0 1 3 0v1M15 11a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-1.5a5 5 0 0 1-4-2L4.8 14.6a1.5 1.5 0 0 1 2.3-1.9L9 14.5"/></svg> Пример выше — это один из многочисленных <span class="nw">нюансов запуска <svg class="pt down" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 11V4.5a1.5 1.5 0 0 1 3 0V10.5M12 10a1.5 1.5 0 0 1 3 0v1M15 11a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-1.5a5 5 0 0 1-4-2L4.8 14.6a1.5 1.5 0 0 1 2.3-1.9L9 14.5"/></svg></span></span><span class="en"><svg class="pt up" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 11V4.5a1.5 1.5 0 0 1 3 0V10.5M12 10a1.5 1.5 0 0 1 3 0v1M15 11a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-1.5a5 5 0 0 1-4-2L4.8 14.6a1.5 1.5 0 0 1 2.3-1.9L9 14.5"/></svg> The example above is one of many <span class="nw">launch nuances <svg class="pt down" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 11V4.5a1.5 1.5 0 0 1 3 0V10.5M12 10a1.5 1.5 0 0 1 3 0v1M15 11a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-1.5a5 5 0 0 1-4-2L4.8 14.6a1.5 1.5 0 0 1 2.3-1.9L9 14.5"/></svg></span></span></p>
     <ul class="qs">
       <li class="q"><button type="button" class="q-toggle" aria-controls="qa-1"><span class="ico sm"><svg class="lock-c" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><svg class="lock-o" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-1.9"/></svg></span><span class="q-text"><span class="ru">Как сделать так, чтобы весь ритейл согласился вступить в программу?</span><span class="en">How do you get all of retail to join the programme?</span></span></button><div class="q-answer" id="qa-1"><p><span class="ru">Ответ — на консультации</span><span class="en">The answer is for the consultation</span></p><a class="btn ask-btn" href="mailto:hello@example.com?subject=%D0%97%D0%B0%D0%BF%D1%83%D1%81%D0%BA%20%D1%80%D0%B0%D1%81%D1%81%D1%80%D0%BE%D1%87%D0%BA%D0%B8%3A%20%D0%BE%D0%B1%D1%81%D1%83%D0%B4%D0%B8%D1%82%D1%8C&body=%D0%9A%D0%B0%D0%BA%20%D1%81%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C%20%D1%82%D0%B0%D0%BA%2C%20%D1%87%D1%82%D0%BE%D0%B1%D1%8B%20%D0%B2%D0%B5%D1%81%D1%8C%20%D1%80%D0%B8%D1%82%D0%B5%D0%B9%D0%BB%20%D1%81%D0%BE%D0%B3%D0%BB%D0%B0%D1%81%D0%B8%D0%BB%D1%81%D1%8F%20%D0%B2%D1%81%D1%82%D1%83%D0%BF%D0%B8%D1%82%D1%8C%20%D0%B2%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%83%3F"><span class="ru">Обсудить на встрече</span><span class="en">Discuss at a meeting</span></a></div></li>
@@ -458,8 +449,36 @@ function setMode(mode) {
   document.getElementById("mode-usual").setAttribute("aria-pressed", mode === "usual" ? "true" : "false");
   document.getElementById("mode-program").setAttribute("aria-pressed", mode === "program" ? "true" : "false");
 }
+function confetti() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var cv = document.createElement("canvas");
+  cv.className = "confetti";
+  cv.setAttribute("aria-hidden", "true");
+  document.body.appendChild(cv);
+  var dpr = window.devicePixelRatio || 1, W = cv.width = innerWidth * dpr, H = cv.height = innerHeight * dpr;
+  var ctx = cv.getContext("2d"), colors = ["#0fbcd0", "#84f3c6", "#ffffff", "#ffd54a", "#ff7ab8", "#7b61ff", "#033b30"];
+  var box = document.querySelector("#try .tiles-wrap").getBoundingClientRect();
+  var ox = (box.left + box.width / 2) * dpr, oy = (box.top + box.height / 2) * dpr, ps = [];
+  for (var i = 0; i < 160; i++) {
+    var a = Math.random() * Math.PI * 2, v = (4 + Math.random() * 9) * dpr;
+    ps.push({ x: ox + (Math.random() - 0.5) * box.width * dpr * 0.6, y: oy, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 6 * dpr,
+      w: (6 + Math.random() * 6) * dpr, h: (3 + Math.random() * 5) * dpr, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.4,
+      c: colors[i % colors.length] });
+  }
+  var t0 = performance.now();
+  (function frame(now) {
+    var k = (now - t0) / 3500;
+    ctx.clearRect(0, 0, W, H);
+    ps.forEach(function (p) {
+      p.vy += 0.22 * dpr; p.vx *= 0.99; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+      ctx.save(); ctx.globalAlpha = Math.max(0, 1 - Math.max(0, k - 0.6) / 0.4);
+      ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+    });
+    if (k < 1) requestAnimationFrame(frame); else cv.remove();
+  })(t0);
+}
 document.getElementById("mode-usual").addEventListener("click", function () { setMode("usual"); });
-document.getElementById("mode-program").addEventListener("click", function () { setMode("program"); });
+document.getElementById("mode-program").addEventListener("click", function () { setMode("program"); confetti(); });
 document.getElementById("try").classList.add("js");
 Array.prototype.forEach.call(document.querySelectorAll("#try .q-toggle"), function (t) {
   t.setAttribute("aria-expanded", "false");
