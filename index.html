@@ -7,13 +7,15 @@
 <meta name="description" content="Помогу банку запустить карту рассрочки и построить вокруг неё партнёрскую сеть.">
 <style>
 :root {
-  --bg: #1fd9a0;
+  --bg: #4fdcc8;
+  --turq: #0fbcd0;
+  --mint: #84f3c6;
   --fg: #050806;
   --muted: #0d1511;
-  --accent: #04503f;
+  --accent: #033b30;
   --accent-soft: #cff7e8;
   --card: #ffffff;
-  --line: #12a67a;
+  --line: #0b8f9c;
   --gutter: clamp(16px, 5vw, 32px);
 }
 * { box-sizing: border-box; }
@@ -21,7 +23,7 @@ html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg) linear-gradient(165deg, #12cf93 0%, #3fe5b4 35%, #5beec3 55%, #25dba3 80%, #0fc98c 100%);
+  background: var(--bg);
   color: var(--fg);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
@@ -66,7 +68,7 @@ a:focus-visible, .btn:focus-visible, .lang button:focus-visible { outline: 2px s
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(31, 217, 160, 0.9);
+  background: rgba(15, 188, 208, 0.9);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
 }
@@ -102,6 +104,8 @@ html[data-lang="en"] #lang-en {
 
 main section { padding: clamp(48px, 9vw, 112px) 0; }
 main section + section { border-top: 0; }
+main section:nth-of-type(odd) { background: linear-gradient(180deg, var(--turq), var(--mint)); }
+main section:nth-of-type(even) { background: linear-gradient(180deg, var(--mint), var(--turq)); }
 
 #offer { padding-top: clamp(48px, 10vw, 120px); }
 #offer .lead { color: var(--muted); font-size: 1.15em; margin: 0 0 1.5rem; }
