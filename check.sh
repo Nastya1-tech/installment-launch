@@ -72,6 +72,17 @@ has 'в рассрочку можно' "RU available label"
 has 'цена со скидкой' "RU discount label"
 has 'function setMode\(' "setMode function"
 [ "$(sed -n '/id="try"/,/<\/section>/p' "$F" | grep -o 'class="tile' | wc -l | tr -d ' ')" -ge 5 ] || { echo "FAIL: try needs at least 5 tiles"; exit 1; }
-if sed -n '/id="try"/,/<\/section>/p' "$F" | sed 's/<[^>]*>//g' | grep -qE '[0-9]'; then echo "FAIL: digits in try block"; exit 1; fi
+if sed -n '/id="try"/,/<\/section>/p' "$F" | sed 's/<[^>]*>//g' | sed 's/B2[BC]//g' | grep -qE '[0-9]'; then echo "FAIL: digits in try block"; exit 1; fi
+
+# MVP-3: закрытый список из 11 вопросов
+[ "$(grep -o 'class="q"' "$F" | wc -l | tr -d ' ')" -eq 11 ] || { echo "FAIL: exactly 11 questions expected"; exit 1; }
+[ "$(grep -o 'class="btn ask-btn"' "$F" | wc -l | tr -d ' ')" -eq 11 ] || { echo "FAIL: each question needs an ask button"; exit 1; }
+[ "$(grep -o 'aria-expanded="false" aria-controls="qa-' "$F" | wc -l | tr -d ' ')" -eq 11 ] || { echo "FAIL: each question toggle needs aria-expanded"; exit 1; }
+has 'Это один из многих нюансов запуска' "RU nuances phrase"
+has 'This is one of many launch nuances' "EN nuances phrase"
+has 'Ответ — на консультации' "RU answer line"
+has 'Обсудить на встрече' "RU ask button"
+has 'subject=%D0%97.*&body=' "mailto with subject and body for questions"
+has '"&body=" \+ encodeURIComponent' "setLang updates question mail body"
 
 echo "OK"
